@@ -1,0 +1,82 @@
+Binary tree code:
+Binary Tree
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{	int data;
+	struct node *rchild;
+	struct node *lchild;
+};
+ struct node* createnode() 
+ {   int value;
+     printf("enter data ");
+     scanf("%d",&value);
+     struct node* newNode = (struct node*)malloc(sizeof(struct node));
+     newNode->data = value;
+     newNode->lchild = NULL;
+     newNode->rchild = NULL;
+     return newNode;
+ }
+  struct node *create()
+  {	int ch;
+	struct node* t;
+	t=createnode();
+	printf("if you want to create a left child of %d press 1 else 0", t->data);
+             scanf("%d", &ch);
+	if(ch==1)
+	    {         t->lchild=create();
+	    }
+	printf("if you want to create a right child of %d press 1 else 0", t->data);
+             scanf("%d",&ch);
+            if(ch==1)
+	{          t->rchild=create();
+	}
+            return t;
+    }
+void inorder(struct node *t)
+ {      if(t)
+     {	inorder(t->lchild);
+	printf("%d  ",t->data);
+	inorder(t->rchild);
+      } }
+ void preorder(struct node *t)
+{	if(t)
+	{  printf("%d",t->data);
+	   preorder(t->lchild);
+	   preorder(t->rchild);
+            }
+   }
+
+void postorder(struct node *t)
+{	if(t)
+	{  postorder(t->lchild);
+	   postorder(t->rchild);
+	   printf("%d",t->data);
+            }
+}
+int main()
+{     struct node  *root;
+     int choice;
+     while(1)
+     {
+        printf("\n 1.create \n      2.inorder \n    3.preorder\n    4.postorder \n   5:exit\n");
+        printf("\n enter your choice");
+        scanf("%d",&choice);
+        switch(choice)
+        {	case 1: root=create();
+		break;
+	case 2: printf("inorder traversal\n");
+		inorder(root);
+		break;
+	case 3: printf("\n Preorder traversal\n");
+		preorder(root);
+		break;
+             case 4: printf("\n Post order traversal\n");
+		postorder(root);
+		break;
+	case 5: exit(0);
+        }
+   }
+   return 0;
+}
